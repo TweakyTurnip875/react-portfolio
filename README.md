@@ -1,2 +1,2 @@
-# Noah Smith react portfolio
+# Noah Smith React Portfolio Application
 

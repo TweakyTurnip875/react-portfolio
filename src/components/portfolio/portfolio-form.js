@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { DropzoneComponent } from "react-dropzone-component";
+
+import "../../../node_modules/dropzone/dist/min/dropzone.min.css";
+import "../../../node_modules/react-dropzone-component/styles/filepicker.css";
 
 export default class PortfolioForm extends Component {
 	constructor(props) {
@@ -15,8 +19,24 @@ export default class PortfolioForm extends Component {
 			banner_image: "",
 			logo: "",
 		};
+        this.componentConfig = this.componentConfig.bind(this)
+        this.djsConfig = this.djsConfig.bind(this)
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+
+	}
+	componentConfig() {
+		return {
+			iconFiletypes: [".jpg", ".png", ".gif"],
+			showFiletypeIcon: true,
+			postUrl: "https://httpbin.org/post",
+		};
+	}
+	djsConfig() {
+		return {
+			addRemoveLinks: true,
+			maxFiles: 1,
+		};
 	}
 	buildForm() {
 		let formData = new FormData();
@@ -42,7 +62,7 @@ export default class PortfolioForm extends Component {
 				{ withCredentials: true }
 			)
 			.then((res) => {
-				this.props.handleSuccessfulFormSubmission(res.data.portfolio_item)
+				this.props.handleSuccessfulFormSubmission(res.data.portfolio_item);
 			})
 			.catch((error) => {
 				console.log("portfolio form submit error", error);
@@ -83,12 +103,12 @@ export default class PortfolioForm extends Component {
 						<select
 							name="category"
 							value={this.state.category}
-                            onChange={this.handleChange}
+							onChange={this.handleChange}
 						>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Scheduling">Scheduling</option>
-                            <option value="Learning">Learning</option>
-                        </select>
+							<option value="Entertainment">Entertainment</option>
+							<option value="Scheduling">Scheduling</option>
+							<option value="Learning">Learning</option>
+						</select>
 					</div>
 					<div>
 						<textarea
@@ -98,6 +118,12 @@ export default class PortfolioForm extends Component {
 							value={this.state.description}
 							onChange={this.handleChange}
 						/>
+					</div>
+					<div>
+						<DropzoneComponent
+							config={this.componentConfig()}
+							djsConfig={this.djsConfig()}
+						></DropzoneComponent>
 					</div>
 					<div>
 						<button type="submit">save</button>

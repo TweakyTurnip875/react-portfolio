@@ -15,9 +15,9 @@ export default class PortfolioManager extends Component {
 		this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
 	}
 	handleSuccessfulFormSubmission(portfolioItem) {
-		// TODO
-		// update portfolio items state
-		// and add the item to the list.
+		this.setState({
+			data: [portfolioItem].concat(this.state.data)
+		})
 	}
 	handleFormSubmissionError(error) {
 		console.log("error submiting form", error)

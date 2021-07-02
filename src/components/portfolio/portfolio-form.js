@@ -37,12 +37,12 @@ export default class PortfolioForm extends Component {
 	handleSubmit(event) {
 		axios
 			.post(
-				"https://tweakyturnip875.devcamp.space/portfolio/portfolio_items",
+				"https://tweakyturnip875.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc",
 				this.buildForm(),
 				{ withCredentials: true }
 			)
 			.then((res) => {
-				console.log("post submitted", res);
+				this.props.handleSuccessfulFormSubmission(res.data.portfolio_item)
 			})
 			.catch((error) => {
 				console.log("portfolio form submit error", error);

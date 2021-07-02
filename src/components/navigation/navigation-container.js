@@ -19,11 +19,11 @@ const NavigationContainer = (props) => {
 		axios
 			.delete("https://api.devcamp.space/logout", { withCredentials: true })
 			.then((res) => {
-				if(res.status === 200) {
+				if (res.status === 200) {
 					props.history.push("/");
 					props.handleSuccessfulLogout();
 				}
-				return res.data
+				return res.data;
 			})
 			.catch((error) => {
 				console.log("Error signing out", error);

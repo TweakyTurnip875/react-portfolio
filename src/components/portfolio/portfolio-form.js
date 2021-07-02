@@ -26,7 +26,7 @@ export default class PortfolioForm extends Component {
         formData.append("portfolio_item[url]", this.state.url);
         formData.append("portfolio_item[category]", this.state.position)
         formData.append("portfolio_item[category]", this.state.category);
-
+        
         return formData
     }
     handleChange(event) {

@@ -3,7 +3,7 @@ import React from "react";
 const PortfolioSidebarList = (props) => {
 	const portfolioItemsList = props.portfolioItems.map((items) => {
 		return (
-			<div className="portfolio-sidebar-prev">
+			<div key={items.id} className="portfolio-sidebar-prev">
 				<div className="portfolio-sidebar-thumb-img">
 					<img src={items.thumb_image_url}></img>
 				</div>

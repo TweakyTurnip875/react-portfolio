@@ -24,7 +24,7 @@ export default class PortfolioForm extends Component {
 		formData.append("portfolio_item[name]", this.state.name);
 		formData.append("portfolio_item[description]", this.state.description);
 		formData.append("portfolio_item[url]", this.state.url);
-		formData.append("portfolio_item[category]", this.state.position);
+		formData.append("portfolio_item[position]", this.state.position);
 		formData.append("portfolio_item[category]", this.state.category);
 
 		return formData;
@@ -80,16 +80,20 @@ export default class PortfolioForm extends Component {
 							value={this.state.position}
 							onChange={this.handleChange}
 						/>
-						<input
-							type="text"
+						<select
 							name="category"
-							placeholder="category"
 							value={this.state.category}
-							onChange={this.handleChange}
-						/>
+                            onChange={this.handleChange}
+						>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Scheduling">Scheduling</option>
+                            <option value="Learning">Learning</option>
+                        </select>
 					</div>
 					<div>
-						<input
+						<textarea
+                            rows="6"
+                            cols="30"
 							type="text"
 							name="description"
 							placeholder="description"

@@ -10,7 +10,7 @@ export default class PortfolioForm extends Component {
 			description: "",
 			position: "",
 			url: "",
-			category: "",
+			category: "Entertainment",
 			thumb_image: "",
 			banner_image: "",
 			logo: "",
@@ -59,7 +59,7 @@ export default class PortfolioForm extends Component {
 						<input
 							type="text"
 							name="name"
-							placeholder="name"
+							placeholder="Name"
 							value={this.state.name}
 							onChange={this.handleChange}
 						/>
@@ -67,7 +67,7 @@ export default class PortfolioForm extends Component {
 						<input
 							type="text"
 							name="url"
-							placeholder="url"
+							placeholder="URL"
 							value={this.state.url}
 							onChange={this.handleChange}
 						/>
@@ -76,7 +76,7 @@ export default class PortfolioForm extends Component {
 						<input
 							type="text"
 							name="position"
-							placeholder="position"
+							placeholder="Position"
 							value={this.state.position}
 							onChange={this.handleChange}
 						/>
@@ -92,11 +92,9 @@ export default class PortfolioForm extends Component {
 					</div>
 					<div>
 						<textarea
-                            rows="6"
-                            cols="30"
 							type="text"
 							name="description"
-							placeholder="description"
+							placeholder="Description"
 							value={this.state.description}
 							onChange={this.handleChange}
 						/>

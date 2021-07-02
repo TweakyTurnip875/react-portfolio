@@ -31,7 +31,6 @@ export default class PortfolioManager extends Component {
 				this.setState({
 					data: [...res.data.portfolio_items]
 				});
-                console.log(this.state.data)
 			})
 			.catch((error) => {
 				console.log(error);

@@ -23,7 +23,6 @@ const NavigationContainer = (props) => {
 					props.history.push("/");
 					props.handleSuccessfulLogout();
 				}
-				console.log(res.status)
 				return res.data
 			})
 			.catch((error) => {

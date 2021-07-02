@@ -1,0 +1,43 @@
+.portfolio-items-wrapper {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .portfolio-item-wrapper {
+        position:relative;
+        .portfolio-img-background {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width:100%;
+            height:350px;
+        }
+        .img-txt-wrapper {
+            top:0;
+            position: absolute;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height:100%;
+            text-align: center;
+            padding-left: 100px;
+            padding-right: 100px;
+            .subtitle {
+                color:transparent;
+                font-weight: 400;
+                transition: 0.5s ease-in-out;
+            }
+            .logo-wrapper img {
+                width:50%;
+                margin-bottom:20px;
+            }
+        }
+        .img-txt-wrapper:hover .subtitle {
+            color:$teal;
+        }
+    }
+}
+
+.img-blur {
+    transition: 1s;
+    filter:brightness(10%);
+}

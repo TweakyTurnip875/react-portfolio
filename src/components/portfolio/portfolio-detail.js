@@ -1,11 +1,10 @@
 import React from 'react';
 
-import PortfolioContainer from '../portfolio/portfolio-container';
 
 export default function(props) {
     return (
         <div>
-            <PortfolioContainer />
+            <h1>Portfolio Detail for {props.match.params.slug}</h1>
         </div>
     )
 }

@@ -23,7 +23,9 @@ export default class PortfolioForm extends Component {
 		this.djsConfig = this.djsConfig.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleThumbDrop = this.handleThumbDrop.bind(this)
+		this.handleThumbDrop = this.handleThumbDrop.bind(this);
+
+		this.thumbRef = React.createRef();
 	}
 	componentConfig() {
 		return {
@@ -47,8 +49,8 @@ export default class PortfolioForm extends Component {
 		formData.append("portfolio_item[position]", this.state.position);
 		formData.append("portfolio_item[category]", this.state.category);
 
-		if(this.state.thumb_image) {
-			formData.append("portfolio_item[thumb_image]", this.state.thumb_image)
+		if (this.state.thumb_image) {
+			formData.append("portfolio_item[thumb_image]", this.state.thumb_image);
 		}
 
 		return formData;
@@ -72,6 +74,20 @@ export default class PortfolioForm extends Component {
 			)
 			.then((res) => {
 				this.props.handleSuccessfulFormSubmission(res.data.portfolio_item);
+				[this.thumbRef].forEach(ref => {
+					ref.current.dropzone.removeAllFiles();
+				});
+				this.setState({
+					name: "",
+					description: "",
+					position: "",
+					url: "",
+					category: "Entertainment",
+					thumb_image: "",
+					banner_image: "",
+					logo: "",
+				})
+
 			})
 			.catch((error) => {
 				console.log("portfolio form submit error", error);
@@ -130,6 +146,7 @@ export default class PortfolioForm extends Component {
 					</div>
 					<div>
 						<DropzoneComponent
+							ref={this.thumbRef}
 							config={this.componentConfig()}
 							djsConfig={this.djsConfig()}
 							eventHandlers={this.handleThumbDrop()}

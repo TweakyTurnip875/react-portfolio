@@ -124,7 +124,7 @@ export default class PortfolioForm extends Component {
 						<input
 							type="text"
 							name="name"
-							placeholder="Name"
+							placeholder="Portfolio Item Name"
 							value={this.state.name}
 							onChange={this.handleChange}
 						/>
@@ -194,7 +194,7 @@ export default class PortfolioForm extends Component {
 						</DropzoneComponent>
 					</div>
 					<div>
-						<button className="btn" type="submit">save</button>
+						<button className="btn" type="submit">Save</button>
 					</div>
 				</form>
 		);

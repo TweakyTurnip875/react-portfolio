@@ -11,17 +11,37 @@ export default class PortfolioManager extends Component {
 		this.state = {
 			data: [],
 		};
-		this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this)
-		this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
+		this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
+		this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
+		this.handleDeleteClick = this.handleDeleteClick.bind(this);
+	}
+	handleDeleteClick(portfolioItem) {
+		axios
+			.delete(
+				`https://api.devcamp.space/portfolio/portfolio_items/${portfolioItem.id}`,
+				{ withCredentials: true }
+			)
+			.then((res) => {
+				this.setState({
+					data: this.state.data.filter(items => {
+						return items.id !== portfolioItem.id;
+					})
+				})
+				return res.data;
+			})
+			.catch((error) => {
+				console.log("Error deleting record", error);
+			});
 	}
 	handleSuccessfulFormSubmission(portfolioItem) {
 		this.setState({
-			data: [portfolioItem].concat(this.state.data)
-		})
+			data: [portfolioItem].concat(this.state.data),
+		});
 	}
 	handleFormSubmissionError(error) {
-		console.log("error submiting form", error)
+		console.log("error submiting form", error);
 	}
+
 	getPortfolioItemData() {
 		axios
 			.get("https://tweakyturnip875.devcamp.space/portfolio/portfolio_items", {
@@ -29,7 +49,7 @@ export default class PortfolioManager extends Component {
 			})
 			.then((res) => {
 				this.setState({
-					data: [...res.data.portfolio_items]
+					data: [...res.data.portfolio_items],
 				});
 			})
 			.catch((error) => {
@@ -43,13 +63,16 @@ export default class PortfolioManager extends Component {
 		return (
 			<div className="portfolio-manager">
 				<div className="left-column">
-					<PortfolioForm 
+					<PortfolioForm
 						handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
 						handleFormSubmissionError={this.handleFormSubmissionError}
 					/>
 				</div>
 				<div className="right-column">
-					<PortfolioSidebarList portfolioItems={this.state.data}/>
+					<PortfolioSidebarList
+						handleDeleteClick={this.handleDeleteClick}
+						portfolioItems={this.state.data}
+					/>
 				</div>
 			</div>
 		);

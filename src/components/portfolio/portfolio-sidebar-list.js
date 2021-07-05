@@ -9,6 +9,7 @@ const PortfolioSidebarList = (props) => {
 				</div>
 				<h1 className="title">{items.name}</h1>
 				<h2>{items.id}</h2>
+				<a onClick={() => props.handleDeleteClick(items)}>delete</a>
 			</div>
 		);
 	});

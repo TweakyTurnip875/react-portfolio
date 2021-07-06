@@ -18,6 +18,9 @@ export default class PortfolioForm extends Component {
 			thumb_image: "",
 			banner_image: "",
 			logo: "",
+			editMode: true,
+			apiUrl: "https://tweakyturnip875.devcamp.space/portfolio/portfolio_items/",
+			apiReq: "post"
 		};
 		this.componentConfig = this.componentConfig.bind(this);
 		this.djsConfig = this.djsConfig.bind(this);
@@ -55,6 +58,9 @@ export default class PortfolioForm extends Component {
 				position: position || "",
 				url: url || "",
 				category: category || "Entertainment",
+				editMode: true,
+				apiUrl: `https://tweakyturnip875.devcamp.space/portfolio/portfolio_items/${id}`,
+				apiReq: "patch"
 			})
 		}
 	}
@@ -114,12 +120,12 @@ export default class PortfolioForm extends Component {
 		});
 	}
 	handleSubmit(event) {
-		axios
-			.post(
-				"https://tweakyturnip875.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc",
-				this.buildForm(),
-				{ withCredentials: true }
-			)
+		axios({
+			method: this.state.apiReq,
+			url: this.state.apiUrl,
+			data: this.buildForm(),
+			withCredentials: true
+		})
 			.then((res) => {
 				this.props.handleSuccessfulFormSubmission(res.data.portfolio_item);
 				[this.thumbRef, this.bannerRef, this.logoRef].forEach((ref) => {

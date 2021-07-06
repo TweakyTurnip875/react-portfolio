@@ -13,7 +13,8 @@ export default class PortfolioManager extends Component {
 			editData: {}
 		};
 		this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
-		this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
+		this.handleNewFormSubmission = this.handleNewFormSubmission.bind(this);
+		this.handleUpdateFormSubmission = this.handleUpdateFormSubmission.bind(this)
 		this.handleDeleteClick = this.handleDeleteClick.bind(this);
 		this.handleEditClick = this.handleEditClick.bind(this)
 		this.clearEditData = this.clearEditData.bind(this)
@@ -46,7 +47,10 @@ export default class PortfolioManager extends Component {
 				console.log("Error deleting record", error);
 			});
 	}
-	handleSuccessfulFormSubmission(portfolioItem) {
+	handleUpdateFormSubmission() {
+		this.getPortfolioItemData()
+	}
+	handleNewFormSubmission(portfolioItem) {
 		this.setState({
 			data: [portfolioItem].concat(this.state.data),
 		});
@@ -77,7 +81,8 @@ export default class PortfolioManager extends Component {
 			<div className="portfolio-manager">
 				<div className="left-column">
 					<PortfolioForm
-						handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
+						handleNewFormSubmission={this.handleNewFormSubmission}
+						handleUpdateFormSubmission={this.handleUpdateFormSubmission}
 						handleFormSubmissionError={this.handleFormSubmissionError}
 						clearEditData={this.clearEditData}
 						editData={this.state.editData}

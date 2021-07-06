@@ -32,6 +32,32 @@ export default class PortfolioForm extends Component {
 		this.logoRef = React.createRef();
 
 	}
+	componentDidUpdate() {
+		if(Object.keys(this.props.editData).length > 0) {
+			const {
+				id,
+				name,
+				description,
+				category,
+				position,
+				url,
+				thumb_image_url,
+				banner_image_url,
+				logo_url
+			} = this.props.editData
+
+			this.props.clearEditData()
+
+			this.setState({
+				id: id,
+				name: name || "",
+				description: description || "",
+				position: position || "",
+				url: url || "",
+				category: category || "Entertainment",
+			})
+		}
+	}
 	componentConfig() {
 		return {
 			iconFiletypes: [".jpg", ".png", ".gif"],

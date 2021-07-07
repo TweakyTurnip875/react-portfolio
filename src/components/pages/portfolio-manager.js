@@ -14,19 +14,25 @@ export default class PortfolioManager extends Component {
 		};
 		this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
 		this.handleNewFormSubmission = this.handleNewFormSubmission.bind(this);
-		this.handleUpdateFormSubmission = this.handleUpdateFormSubmission.bind(this)
+		this.handleEditFormSubmission = this.handleEditFormSubmission.bind(this)
 		this.handleDeleteClick = this.handleDeleteClick.bind(this);
 		this.handleEditClick = this.handleEditClick.bind(this)
 		this.clearEditData = this.clearEditData.bind(this)
 	}
-	clearEditData() {
-		this.setState({
-			editData: {}
-		})
-	}
+
+
+
+	// Will set state to the corresponding portfolio item whenever edit button is clicked.
 	handleEditClick(portfolioItem) {
 		this.setState({
 			editData: portfolioItem
+		})
+	}
+
+	// Will clear editData state to prevent infinate loops.
+	clearEditData() {
+		this.setState({
+			editData: {}
 		})
 	}
 	handleDeleteClick(portfolioItem) {
@@ -37,6 +43,7 @@ export default class PortfolioManager extends Component {
 			)
 			.then((res) => {
 				this.setState({
+					// filters through data in state to remove items from sidebar when deleted without having to refresh the page.
 					data: this.state.data.filter(items => {
 						return items.id !== portfolioItem.id;
 					})
@@ -47,14 +54,7 @@ export default class PortfolioManager extends Component {
 				console.log("Error deleting record", error);
 			});
 	}
-	handleUpdateFormSubmission() {
-		this.getPortfolioItemData()
-	}
-	handleNewFormSubmission(portfolioItem) {
-		this.setState({
-			data: [portfolioItem].concat(this.state.data),
-		});
-	}
+
 	handleFormSubmissionError(error) {
 		console.log("error submiting form", error);
 	}
@@ -73,6 +73,16 @@ export default class PortfolioManager extends Component {
 				console.log(error);
 			});
 	}
+	// Gets updated portfolio item data from server.
+	handleEditFormSubmission() {
+		this.getPortfolioItemData()
+	}
+	// pushes new portfolio item data to state when called
+	handleNewFormSubmission(portfolioItem) {
+		this.setState({
+			data: [portfolioItem].concat(this.state.data),
+		});
+	}
 	componentDidMount() {
 		this.getPortfolioItemData();
 	}
@@ -82,7 +92,7 @@ export default class PortfolioManager extends Component {
 				<div className="left-column">
 					<PortfolioForm
 						handleNewFormSubmission={this.handleNewFormSubmission}
-						handleUpdateFormSubmission={this.handleUpdateFormSubmission}
+						handleEditFormSubmission={this.handleEditFormSubmission}
 						handleFormSubmissionError={this.handleFormSubmissionError}
 						clearEditData={this.clearEditData}
 						editData={this.state.editData}

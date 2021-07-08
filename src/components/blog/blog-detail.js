@@ -36,13 +36,15 @@ class BlogDetail extends React.Component {
 		return (
 			<div className="blog-detail-container">
 				<div className="blog-detail-wrapper">
-					<div>
+					<div className="post-title-content">
                         <h1>{title}</h1> 
                         <div className="status">({blog_status})</div>
                     </div>
-					<div className="featured-image-wrapper">
-						<img src={featured_image_url} />
-					</div>
+                    {featured_image_url ? (
+					    <div className="featured-image-wrapper"><img src={featured_image_url} /></div>
+                    ) : (
+                        null
+                    )}
 					<div className="content">{content}</div>
 
 				</div>

@@ -14,6 +14,8 @@ import PortfolioDetail from "./portfolio/portfolio-detail";
 import NoMatch from "./pages/no-match";
 import Auth from "./pages/auth";
 import PortfolioManager from "./pages/portfolio-manager";
+import BlogDetail from "./blog/blog-detail";
+
 
 library.add(faTrash, faSignOutAlt, faEdit, faTrashAlt, faTimes)
 
@@ -113,6 +115,8 @@ export default class App extends Component {
 							<Route path="/about" component={About} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/blog" component={Blog} />
+							<Route path="/b/:slug" component={BlogDetail} />
+
 							{this.state.loginStatus === "LOGGED_IN"
 								? this.authorizedRoutes()
 								: null}

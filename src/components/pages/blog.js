@@ -35,10 +35,17 @@ class Blog extends Component {
 	}
 	render() {
 		const blogRecords = this.state.blogItems.map((blogItem) => {
-
 			return <BlogItem key={blogItem.id} blogItem={blogItem} />
 		});
-		return <div>{blogRecords}</div>;
+		return (
+			<div className="blog-detail-container">
+				<div className="blog-records">
+					<div className="blog-detail-wrapper">
+						{blogRecords}
+					</div>
+				</div>
+			</div>
+		)
 	}
 }
 

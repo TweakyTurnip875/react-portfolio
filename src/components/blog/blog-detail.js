@@ -1,11 +1,54 @@
-import React from 'react'
+import React from "react";
+import axios from "axios";
 
-const BlogDetail = (props) => {
-    return (
-        <div>
-            <h1>blog details for {props.match.params.slug}</h1>
-        </div>
-    )
+class BlogDetail extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			currentId: props.match.params.slug,
+			currentBlog: {},
+		};
+		this.getBlogItems = this.getBlogItems.bind(this);
+	}
+
+	getBlogItems() {
+		axios
+			.get(
+				`https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs/${this.state.currentId}`
+			)
+			.then((res) => {
+				this.setState({
+					currentBlog: res.data.portfolio_blog,
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
+	componentDidMount() {
+		this.getBlogItems();
+	}
+	render() {
+		const { title, content, featured_image_url, blog_status } =
+			this.state.currentBlog;
+		return (
+			<div className="blog-detail-container">
+				<div className="blog-detail-wrapper">
+					<div>
+                        <h1>{title}</h1> 
+                        <div className="status">({blog_status})</div>
+                    </div>
+					<div className="featured-image-wrapper">
+						<img src={featured_image_url} />
+					</div>
+					<div className="content">{content}</div>
+
+				</div>
+			</div>
+		);
+	}
 }
 
-export default BlogDetail
+export default BlogDetail;

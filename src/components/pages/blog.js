@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import BlogItem from "../blog/blog-item";
 
@@ -10,28 +10,42 @@ class Blog extends Component {
 
 		this.state = {
 			blogItems: [],
+			currentPage: 0,
+			totalCount: 0,
+			isLoading: true,
+			allPostsLoaded: "all posts have been loaded."
 		};
 
 		this.getBlogItems = this.getBlogItems.bind(this);
-		this.activateInfiniteScroll()
+		this.onScroll = this.onScroll.bind(this);
 	}
 
-	activateInfiniteScroll() {
-		window.onscroll = () => {
-			if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-				console.log("get more posts")
+	onScroll() {
+			if(this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+				return;
 			}
-		}
+			if (
+				window.innerHeight + document.documentElement.scrollTop ===
+				document.documentElement.offsetHeight
+			) {
+				this.getBlogItems()
+			}
 	}
 
 	getBlogItems() {
+		this.setState({
+			currentPage: this.state.currentPage + 1,
+		});
 		axios
-			.get("https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs", {
+			.get(`https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`, {
 				withCredentials: true,
 			})
 			.then((res) => {
+				console.log("getting more posts:", res.data)
 				this.setState({
-					blogItems: res.data.portfolio_blogs,
+					blogItems: this.state.blogItems.concat(res.data.portfolio_blogs),
+					totalCount: res.data.meta.total_records,
+					isLoading: false,
 				});
 			})
 			.catch((error) => {
@@ -44,17 +58,19 @@ class Blog extends Component {
 	}
 	render() {
 		const blogRecords = this.state.blogItems.map((blogItem) => {
-			return <BlogItem key={blogItem.id} blogItem={blogItem} />
+			return <BlogItem key={blogItem.id} blogItem={blogItem} />;
 		});
 		return (
 			<div className="blog-detail-container">
-				<div className="blog-records">
-					<div className="blog-detail-wrapper">
-						{blogRecords}
+				{this.state.isLoading ? (
+					<div className="content-loader">
+						<FontAwesomeIcon icon="spinner" pulse />
 					</div>
-				</div>
+				) : (
+					<div className="blog-detail-wrapper">{blogRecords}</div>
+				)}
 			</div>
-		)
+		);
 	}
 }
 

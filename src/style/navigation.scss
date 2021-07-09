@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 30px;
-
+  border-bottom: 1px solid #e5e5e5;
   .right-side {
     a {
       margin-left:15px;
@@ -24,7 +24,7 @@
     transition: 0.5s ease-in-out;
     text-transform: uppercase;
     font-size: 0.9rem;
-    margin-right: 22px;
+    margin-right: 20px;
 
     a {
       color: $grey;

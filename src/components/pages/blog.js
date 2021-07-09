@@ -3,6 +3,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import BlogItem from "../blog/blog-item";
+import BlogModal from "../modals/blog-modal";
 
 class Blog extends Component {
 	constructor() {
@@ -13,11 +14,15 @@ class Blog extends Component {
 			currentPage: 0,
 			totalCount: 0,
 			isLoading: true,
-			allPostsLoaded: "all posts have been loaded."
+			blogModalOpen: false
 		};
 
 		this.getBlogItems = this.getBlogItems.bind(this);
 		this.onScroll = this.onScroll.bind(this);
+		this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
+		this.handleModalClose = this.handleModalClose.bind(this)
+
+		window.addEventListener("scroll", this.onScroll, false)
 	}
 
 	onScroll() {
@@ -52,9 +57,23 @@ class Blog extends Component {
 				console.log(error);
 			});
 	}
+	handleNewBlogClick() {
+		this.setState({
+			blogModalOpen: true
+		})
+	}
+
+	handleModalClose() {
+		this.setState({
+			blogModalOpen: false
+		})
+	}
 
 	componentWillMount() {
 		this.getBlogItems();
+	}
+	componentWillUnmount() {
+		window.removeEventListener("scroll", this.onScroll, false)
 	}
 	render() {
 		const blogRecords = this.state.blogItems.map((blogItem) => {
@@ -62,12 +81,18 @@ class Blog extends Component {
 		});
 		return (
 			<div className="blog-detail-container">
+				<div>
+					<a onClick={this.handleNewBlogClick}>Open Modal</a>
+				</div>
+				<BlogModal blogModalOpen={this.state.blogModalOpen} handleModalClose={this.handleModalClose} />
 				{this.state.isLoading ? (
 					<div className="content-loader">
 						<FontAwesomeIcon icon="spinner" pulse />
 					</div>
 				) : (
-					<div className="blog-detail-wrapper">{blogRecords}</div>
+					<div className="blog-detail-wrapper">
+						{blogRecords}
+					</div>
 				)}
 			</div>
 		);

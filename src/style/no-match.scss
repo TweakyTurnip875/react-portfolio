@@ -1,0 +1,43 @@
+.no-match {
+    display: flex;
+    justify-content: center;
+    height:100vh;
+    padding-top:50px;
+    background-color: $offwhite;
+
+    h1 {
+        color: $warning;
+    }
+
+    .error-display-wrapper {
+        display:flex;
+        justify-content: center;
+
+        border: 1px solid black;
+        border-left: none;
+        border-right: none;
+        color: $warning;
+        font-size: 7em;
+        .error-display {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        .error {
+            color: $charcoal;
+            font: 110%/1.5 system-ui, sans-serif;
+        }
+    }
+
+    .return {
+        margin:10px;
+        font-size:1.3em;
+        a {
+            text-decoration: none;
+            color: $charcoal;
+            transition: 0.5s ease-in-out;
+            &:hover {
+                color: $blue;
+            }
+        }
+    }
+}

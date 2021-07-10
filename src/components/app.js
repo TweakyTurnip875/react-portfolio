@@ -3,7 +3,7 @@ import axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt, faEdit, faTimes, faSpinner, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faSignOutAlt, faEdit, faTimes, faSpinner, faServer, faHome } from "@fortawesome/free-solid-svg-icons";
 
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home";
@@ -17,7 +17,7 @@ import PortfolioManager from "./pages/portfolio-manager";
 import BlogDetail from "./blog/blog-detail";
 
 
-library.add(faTrash, faSignOutAlt, faEdit, faTimes, faSpinner, faCircleNotch)
+library.add(faTrash, faSignOutAlt, faEdit, faTimes, faSpinner, faServer, faHome)
 
 export default class App extends Component {
 	constructor(props) {
@@ -25,6 +25,7 @@ export default class App extends Component {
 
 		this.state = {
 			loginStatus: "NOT_LOGGED_IN",
+			isLoading: true
 		};
 		this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
 		this.handleUnsuccessfulLogin = this.handleUnsuccessfulLogin.bind(this);

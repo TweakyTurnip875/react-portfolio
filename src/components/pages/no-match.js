@@ -9,7 +9,7 @@ export default function (props) {
 			<div>
 				<h1>It looks like the page you are looking for doesn't exist!</h1>
 				<div className="error-display-wrapper">
-					<div className="error-display">
+					<div className="one-column">
 						<div className="error">404</div>
 					</div>
 				</div>

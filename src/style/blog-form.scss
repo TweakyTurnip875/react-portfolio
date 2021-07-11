@@ -1,0 +1,10 @@
+.blog-form-wrapper {
+    @include base-grid();
+    grid-template-columns: 1fr;
+    padding:42px;
+
+    @include base-input();
+    input {
+        margin-bottom:0px;
+    }
+}

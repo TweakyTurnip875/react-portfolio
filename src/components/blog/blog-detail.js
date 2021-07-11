@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
-class BlogDetail extends React.Component {
+export default class BlogItem extends Component {
 	constructor(props) {
 		super(props);
 
@@ -52,5 +52,3 @@ class BlogDetail extends React.Component {
 		);
 	}
 }
-
-export default BlogDetail;

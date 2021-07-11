@@ -14,27 +14,37 @@ class Blog extends Component {
 			currentPage: 0,
 			totalCount: 0,
 			isLoading: true,
-			blogModalOpen: false
+			blogModalOpen: false,
 		};
 
 		this.getBlogItems = this.getBlogItems.bind(this);
 		this.onScroll = this.onScroll.bind(this);
-		this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
-		this.handleModalClose = this.handleModalClose.bind(this)
+		this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
+		this.handleModalClose = this.handleModalClose.bind(this);
+		this.handleSuccessfulNewBlogSubmission =
+			this.handleSuccessfulNewBlogSubmission.bind(this);
 
-		window.addEventListener("scroll", this.onScroll, false)
+		window.addEventListener("scroll", this.onScroll, false);
 	}
-
+	handleSuccessfulNewBlogSubmission(blog) {
+		this.setState({
+			blogModalOpen: false,
+			blogItems: [blog].concat(this.state.blogItems)
+		})
+	}
 	onScroll() {
-			if(this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
-				return;
-			}
-			if (
-				window.innerHeight + document.documentElement.scrollTop ===
-				document.documentElement.offsetHeight
-			) {
-				this.getBlogItems()
-			}
+		if (
+			this.state.isLoading ||
+			this.state.blogItems.length === this.state.totalCount
+		) {
+			return;
+		}
+		if (
+			window.innerHeight + document.documentElement.scrollTop ===
+			document.documentElement.offsetHeight
+		) {
+			this.getBlogItems();
+		}
 	}
 
 	getBlogItems() {
@@ -42,11 +52,14 @@ class Blog extends Component {
 			currentPage: this.state.currentPage + 1,
 		});
 		axios
-			.get(`https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`, {
-				withCredentials: true,
-			})
+			.get(
+				`https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`,
+				{
+					withCredentials: true,
+				}
+			)
 			.then((res) => {
-				console.log("getting more posts:", res.data)
+				console.log("getting more posts:", res.data);
 				this.setState({
 					blogItems: this.state.blogItems.concat(res.data.portfolio_blogs),
 					totalCount: res.data.meta.total_records,
@@ -59,21 +72,21 @@ class Blog extends Component {
 	}
 	handleNewBlogClick() {
 		this.setState({
-			blogModalOpen: true
-		})
+			blogModalOpen: true,
+		});
 	}
 
 	handleModalClose() {
 		this.setState({
-			blogModalOpen: false
-		})
+			blogModalOpen: false,
+		});
 	}
 
 	componentWillMount() {
 		this.getBlogItems();
 	}
 	componentWillUnmount() {
-		window.removeEventListener("scroll", this.onScroll, false)
+		window.removeEventListener("scroll", this.onScroll, false);
 	}
 	render() {
 		const blogRecords = this.state.blogItems.map((blogItem) => {
@@ -84,15 +97,19 @@ class Blog extends Component {
 				<div>
 					<a onClick={this.handleNewBlogClick}>Open Modal</a>
 				</div>
-				<BlogModal blogModalOpen={this.state.blogModalOpen} handleModalClose={this.handleModalClose} />
+				<BlogModal
+					blogModalOpen={this.state.blogModalOpen}
+					handleModalClose={this.handleModalClose}
+					handleSuccessfulNewBlogSubmission={
+						this.handleSuccessfulNewBlogSubmission
+					}
+				/>
 				{this.state.isLoading ? (
 					<div className="content-loader">
 						<FontAwesomeIcon icon="spinner" pulse />
 					</div>
 				) : (
-					<div className="blog-detail-wrapper">
-						{blogRecords}
-					</div>
+					<div className="blog-detail-wrapper">{blogRecords}</div>
 				)}
 			</div>
 		);

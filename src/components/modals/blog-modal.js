@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactModal from "react-modal";
 import BlogForm from "../blog/blog-form";
 
-ReactModal.setAppElement(".app-wrapper")
+ReactModal.setAppElement(".app-wrapper");
 
 export default class BlogModal extends Component {
 	constructor(props) {
@@ -18,13 +18,13 @@ export default class BlogModal extends Component {
 				width: "900px",
 			},
 			overlay: {
-				backgroundColor: "rgba(0,0,0,0.7)"
-			}
+				backgroundColor: "rgba(0,0,0,0.7)",
+			},
 		};
-		this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
+		this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
 	}
 	handleSuccessfulFormSubmission(blog) {
-		console.log(blog)
+		this.props.handleSuccessfulNewBlogSubmission(blog)
 	}
 	render() {
 		return (
@@ -35,7 +35,9 @@ export default class BlogModal extends Component {
 					this.props.handleModalClose();
 				}}
 			>
-				<BlogForm handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission} />
+				<BlogForm
+					handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
+				/>
 			</ReactModal>
 		);
 	}

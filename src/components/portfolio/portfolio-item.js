@@ -8,13 +8,6 @@ export default class PortfolioItem extends Component {
       portfolioItemClass: ""
     }
   }
-  /*
-      Data that we will need:
-      - background img: thumb_image_url
-      - logo: logo_url
-      - description: description
-      - id: id
-    */
   handleMouseEnter() {
     this.setState({
       portfolioItemClass: "img-blur"
@@ -32,6 +25,7 @@ export default class PortfolioItem extends Component {
       onMouseEnter={() => this.handleMouseEnter()}
       onMouseLeave={() => this.handleMouseLeave()}
     >
+      <Link to={`/portfolio/${id}`}>
       <div 
         className={"portfolio-img-background " + this.state.portfolioItemClass}
         style={{
@@ -44,7 +38,7 @@ export default class PortfolioItem extends Component {
         </div>
         <div className="subtitle">{description}</div>
       </div>
-      
+      </Link>
     </div>
   );
 }

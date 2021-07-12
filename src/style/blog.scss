@@ -2,13 +2,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+
+    .new-blog-icon-wrapper {
+        position: fixed;
+        right:0;
+        bottom: 0;
 
 
+        a {
+            font-size: 3em;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: 0.5s ease-in-out;
+            opacity: 0.7;
+
+            &:hover {
+                opacity: 1;
+            }
+
+        }
+    }
 
     a {
         text-decoration: none;
         color: $blue;
-        transition: 0.3s all ease-in-out;
+        transition: 0.5s ease-in-out;
 
         &:hover {
             color: $dark-blue;

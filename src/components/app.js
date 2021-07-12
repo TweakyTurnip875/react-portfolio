@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-
-
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home";
 import About from "./pages/about";
@@ -58,10 +56,6 @@ export default class App extends Component {
 			.then((response) => {
 				const loggedIn = response.data.logged_in;
 				const loginStatus = this.state.loginStatus;
-
-				// If loggedIn and status LOGGED_IN => return data
-				// If loggedIn status NOT_LOGGED_IN => update state
-				// If not loggedIn and status LOGGED_IN => update state
 
 				if (loggedIn && loginStatus === "LOGGED_IN") {
 					return loggedIn;

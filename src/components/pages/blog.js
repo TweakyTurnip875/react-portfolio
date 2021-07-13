@@ -95,11 +95,11 @@ class Blog extends Component {
 		return (
 			<div className="blog-detail-container">
 				{this.props.loginStatus === "LOGGED_IN" ? (
-				<div className="new-blog-icon-wrapper">
-					<a onClick={this.handleNewBlogClick}>
-						<FontAwesomeIcon icon="plus-square" />
-					</a>
-				</div>
+					<div className="new-blog-icon-wrapper">
+						<a onClick={this.handleNewBlogClick}>
+							<FontAwesomeIcon icon="plus-square" />
+						</a>
+					</div>
 				) : null}
 				<BlogModal
 					blogModalOpen={this.state.blogModalOpen}

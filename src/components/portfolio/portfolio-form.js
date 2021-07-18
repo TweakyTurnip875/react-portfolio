@@ -167,7 +167,7 @@ export default class PortfolioForm extends Component {
 	deleteImage(image) {
 		axios
 			.delete(
-				`https://tweakyturnip875.devcamp.space/portfolio/delete-portfolio-image/${this.state.id}?image_type=${image}`, 
+				`https://tweakyturnip875.devcamp.space/portfolio/delete-portfolio-image/${this.state.id}?image_type=${image}`,
 				{ withCredentials: true }
 			)
 			.then((res) => {

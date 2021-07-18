@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { DropzoneComponent } from "react-dropzone-component";
+import { DropzoneComponent } from 'react-dropzone-component';
 
 import RichTextEditor from '../forms/rich-text-editor';
 
@@ -22,18 +22,9 @@ export default class BlogForm extends Component {
 		this.componentConfig = this.componentConfig.bind(this);
 		this.djsConfig = this.djsConfig.bind(this);
 		this.handleFeaturedImageDrop = this.handleFeaturedImageDrop.bind(this);
+
+		this.featuredImageRef = React.createRef();
 	}
-
-	buildForm() {
-		let formData = new FormData();
-
-		formData.append('portfolio_blog[title]', this.state.title);
-		formData.append('portfolio_blog[blog_status]', this.state.blog_status);
-		formData.append('portfolio_blog[content]', this.state.content);
-
-		return formData;
-	}
-
 	componentConfig() {
 		return {
 			iconFiletypes: ['.jpg', '.png', '.gif'],
@@ -51,8 +42,24 @@ export default class BlogForm extends Component {
 
 	handleFeaturedImageDrop() {
 		return {
-			addedFile: () => this.setState({ featured_image }),
+			addedfile: (file) => this.setState({ featured_image: file }),
 		};
+	}
+	buildForm() {
+		let formData = new FormData();
+
+		formData.append('portfolio_blog[title]', this.state.title);
+		formData.append('portfolio_blog[blog_status]', this.state.blog_status);
+		formData.append('portfolio_blog[content]', this.state.content);
+
+		if (this.state.featured_image) {
+			formData.append(
+				'portfolio_blog[featured_image]',
+				this.state.featured_image
+			);
+		}
+
+		return formData;
 	}
 
 	handleRichTextEditorChange(content) {
@@ -68,10 +75,14 @@ export default class BlogForm extends Component {
 				{ withCredentials: true }
 			)
 			.then((res) => {
+				if (this.state.featured_image) {
+					this.featuredImageRef.current.dropzone.removeAllFiles();
+				}
 				this.setState({
 					title: '',
 					blog_status: '',
 					content: '',
+					featured_image: '',
 				});
 
 				this.props.handleSuccessfulFormSubmission(res.data.portfolio_blog);
@@ -114,13 +125,12 @@ export default class BlogForm extends Component {
 				</div>
 				<div className="image-uploaders">
 					<DropzoneComponent
+						ref={this.featuredImageRef}
 						config={this.componentConfig()}
 						djsConfig={this.djsConfig()}
 						eventHandlers={this.handleFeaturedImageDrop()}
 					>
-						<div className="dz-message">
-							Featured Image
-						</div>
+						<div className="dz-message">Featured Image</div>
 					</DropzoneComponent>
 				</div>
 				<button className="btn" type="submit">

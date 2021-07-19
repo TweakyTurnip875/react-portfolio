@@ -1,7 +1,7 @@
 .image-uploaders {
 	@include base-grid();
 	grid-template-columns: 200px 200px 200px;
-	.portfolio-manager-edit-image {
+	.edit-dropzone-image {
 		img {
 			width: 100%;
 			height: 120px;

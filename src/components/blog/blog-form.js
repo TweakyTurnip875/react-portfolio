@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { DropzoneComponent } from 'react-dropzone-component';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import RichTextEditor from '../forms/rich-text-editor';
 
@@ -98,6 +99,19 @@ export default class BlogForm extends Component {
 		});
 		event.preventDefault();
 	}
+	deleteImage(imageType) {
+		axios
+			.delete(
+				`https://api.devcamp.space/portfolio/delete-portfolio-blog-image/${this.props.blog.id}?image_type=${imageType}`,
+				{ withCredentials: true }
+			)
+			.then((res) => {
+				this.props.handleFeaturedImageDelete();
+			})
+			.catch((error) => {
+				console.log('error deleting image', error);
+			});
+	}
 
 	componentDidMount() {
 		if (this.props.editMode) {
@@ -140,14 +154,25 @@ export default class BlogForm extends Component {
 					/>
 				</div>
 				<div className="image-uploaders">
-					<DropzoneComponent
-						ref={this.featuredImageRef}
-						config={this.componentConfig()}
-						djsConfig={this.djsConfig()}
-						eventHandlers={this.handleFeaturedImageDrop()}
-					>
-						<div className="dz-message">Featured Image</div>
-					</DropzoneComponent>
+					{this.props.editMode && this.props.blog.featured_image_url ? (
+						<div className="edit-dropzone-image">
+							<img src={this.props.blog.featured_image_url} />
+							<div className="image-delete-link">
+								<a onClick={() => this.deleteImage('featured_image')}>
+									<FontAwesomeIcon icon="times" className="file-removal-icon" />
+								</a>
+							</div>
+						</div>
+					) : (
+						<DropzoneComponent
+							ref={this.featuredImageRef}
+							config={this.componentConfig()}
+							djsConfig={this.djsConfig()}
+							eventHandlers={this.handleFeaturedImageDrop()}
+						>
+							<div className="dz-message">Featured Image</div>
+						</DropzoneComponent>
+					)}
 				</div>
 				<button className="btn" type="submit">
 					submit

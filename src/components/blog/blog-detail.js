@@ -17,6 +17,7 @@ export default class BlogItem extends Component {
 		};
 		this.getBlogItems = this.getBlogItems.bind(this);
 		this.handleEditClick = this.handleEditClick.bind(this);
+		this.handleFeaturedImageDelete = this.handleFeaturedImageDelete.bind(this);
 	}
 
 	handleEditClick() {
@@ -41,7 +42,13 @@ export default class BlogItem extends Component {
 				console.log(error);
 			});
 	}
-
+	handleFeaturedImageDelete() {
+		this.setState({
+			currentBlog: {
+				featured_image_url: '',
+			},
+		});
+	}
 	componentDidMount() {
 		this.getBlogItems();
 	}
@@ -59,6 +66,7 @@ export default class BlogItem extends Component {
 					>
 						<div style={{ gridColumn: '2' }}>
 							<BlogForm
+								handleFeaturedImageDelete={this.handleFeaturedImageDelete}
 								editMode={this.state.editMode}
 								blog={this.state.currentBlog}
 							/>

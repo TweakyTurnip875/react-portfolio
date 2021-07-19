@@ -46,27 +46,56 @@ export default class BlogItem extends Component {
 		this.getBlogItems();
 	}
 	render() {
-		const { title, content, featured_image_url, blog_status } =
+		const { title, content, featured_image_url, blog_status, id } =
 			this.state.currentBlog;
 		const contentManager = () => {
 			if (this.state.editMode) {
-				return <BlogForm />;
+				return (
+					<div
+						style={{
+							display: 'grid',
+							gridTemplateColumns: '1fr 5fr 1fr',
+						}}
+					>
+						<div style={{ gridColumn: '2' }}>
+							<BlogForm
+								id={id}
+								blogTitle={title}
+								blogStatus={blog_status}
+								editMode={this.state.editMode}
+							/>
+						</div>
+					</div>
+				);
 			} else {
 				return (
 					<div className="blog-detail-container">
 						<div className="blog-detail-wrapper">
 							<div className="post-title-content">
-								<h1>{title}</h1>
+								<div
+									style={{
+										display: 'flex',
+										justifyContent: 'space-between',
+										alignItems: 'center',
+									}}
+								>
+									<div className="blog-post-title-wrapper">
+										<h1>{title}</h1>
+									</div>
+									<div
+										className="blog-edit-click"
+										style={{ fontSize: '1.5em' }}
+									>
+										<a onClick={this.handleEditClick}>
+											<FontAwesomeIcon icon="edit" />
+										</a>
+									</div>
+								</div>
 								<div className="status">({blog_status})</div>
 							</div>
 							<BlogFeaturedImage img={featured_image_url} />
 
 							<div className="content">{ReactHtmlParser(content)}</div>
-							<div>
-								<a onClick={this.handleEditClick}>
-									<FontAwesomeIcon icon="edit" />
-								</a>
-							</div>
 						</div>
 					</div>
 				);

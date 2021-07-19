@@ -1,5 +1,5 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
 	faTrash,
@@ -10,7 +10,7 @@ import {
 	faServer,
 	faHome,
 	faPlusSquare,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 const Icons = () => {
 	return library.add(

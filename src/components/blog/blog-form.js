@@ -99,6 +99,16 @@ export default class BlogForm extends Component {
 		event.preventDefault();
 	}
 
+	componentDidMount() {
+		if (this.props.editMode) {
+			this.setState({
+				id: this.props.id,
+				title: this.props.blogTitle,
+				blog_status: this.props.blogStatus,
+			});
+		}
+	}
+
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit} className="blog-form-wrapper">

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import BlogItem from "../blog/blog-item";
-import BlogModal from "../modals/blog-modal";
+import BlogItem from '../blog/blog-item';
+import BlogModal from '../modals/blog-modal';
 
 class Blog extends Component {
 	constructor() {
@@ -24,13 +24,13 @@ class Blog extends Component {
 		this.handleSuccessfulNewBlogSubmission =
 			this.handleSuccessfulNewBlogSubmission.bind(this);
 
-		window.addEventListener("scroll", this.onScroll, false);
+		window.addEventListener('scroll', this.onScroll, false);
 	}
 	handleSuccessfulNewBlogSubmission(blog) {
 		this.setState({
 			blogModalOpen: false,
-			blogItems: [blog].concat(this.state.blogItems)
-		})
+			blogItems: [blog].concat(this.state.blogItems),
+		});
 	}
 	onScroll() {
 		if (
@@ -59,7 +59,7 @@ class Blog extends Component {
 				}
 			)
 			.then((res) => {
-				console.log("getting more posts:", res.data);
+				console.log('getting more posts:', res.data);
 				this.setState({
 					blogItems: this.state.blogItems.concat(res.data.portfolio_blogs),
 					totalCount: res.data.meta.total_records,
@@ -86,7 +86,7 @@ class Blog extends Component {
 		this.getBlogItems();
 	}
 	componentWillUnmount() {
-		window.removeEventListener("scroll", this.onScroll, false);
+		window.removeEventListener('scroll', this.onScroll, false);
 	}
 	render() {
 		const blogRecords = this.state.blogItems.map((blogItem) => {
@@ -94,7 +94,7 @@ class Blog extends Component {
 		});
 		return (
 			<div className="blog-detail-container">
-				{this.props.loginStatus === "LOGGED_IN" ? (
+				{this.props.loginStatus === 'LOGGED_IN' ? (
 					<div className="new-blog-icon-wrapper">
 						<a onClick={this.handleNewBlogClick}>
 							<FontAwesomeIcon icon="plus-square" />

@@ -1,64 +1,59 @@
 .blog-detail-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
 
-    .new-blog-icon-wrapper {
-        position: fixed;
-        right:0;
-        bottom: 0;
+	.fixed-blog-button-styles,
+	.new-blog-icon-wrapper {
+		position: fixed;
+		right: 0;
+		bottom: 0;
 
+		a {
+			font-size: 3em;
+			cursor: pointer;
+			margin-right: 15px;
+			transition: 0.5s ease-in-out;
+			opacity: 0.7;
 
-        a {
-            font-size: 3em;
-            cursor: pointer;
-            margin-right: 15px;
-            transition: 0.5s ease-in-out;
-            opacity: 0.7;
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
 
-            &:hover {
-                opacity: 1;
-            }
+	a {
+		text-decoration: none;
+		color: $blue;
+		transition: 0.5s ease-in-out;
 
-        }
-    }
+		&:hover {
+			color: $dark-blue;
+		}
+	}
 
-    a {
-        text-decoration: none;
-        color: $blue;
-        transition: 0.5s ease-in-out;
+	.blog-detail-wrapper {
+		box-shadow: 0px 3px 40px 1px rgba(32, 23, 23, 0.144);
+		border-radius: 10px;
+		margin-top: 50px;
+		padding: 40px;
+		width: 800px;
 
-        &:hover {
-            color: $dark-blue;
-        }
-    }
-
-    .blog-detail-wrapper {
-        box-shadow: 0px 3px 40px 1px rgba(32, 23, 23, 0.144);
-        border-radius: 10px;
-        margin-top:50px;
-        padding: 40px;
-        width:800px;
-        
-        .post-title-content {
-            margin-bottom: 30px;
-            .status {
-                opacity: 0.3;
-            }
-        }
-        .featured-image-wrapper {
-            img {
-                width: 100%;
-                margin-top:20px;
-                margin-bottom:20px;
-                border-radius: 5px;
-                object-fit: cover;
-            }
-        }
-
-    }
-
-    
-
+		.post-title-content {
+			margin-bottom: 30px;
+			.status {
+				opacity: 0.3;
+			}
+		}
+		.featured-image-wrapper {
+			img {
+				width: 100%;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				border-radius: 5px;
+				object-fit: cover;
+			}
+		}
+	}
 }

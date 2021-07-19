@@ -59,10 +59,8 @@ export default class BlogItem extends Component {
 					>
 						<div style={{ gridColumn: '2' }}>
 							<BlogForm
-								id={id}
-								blogTitle={title}
-								blogStatus={blog_status}
 								editMode={this.state.editMode}
+								blog={this.state.currentBlog}
 							/>
 						</div>
 					</div>

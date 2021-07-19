@@ -102,9 +102,9 @@ export default class BlogForm extends Component {
 	componentDidMount() {
 		if (this.props.editMode) {
 			this.setState({
-				id: this.props.id,
-				title: this.props.blogTitle,
-				blog_status: this.props.blogStatus,
+				id: this.props.blog.id,
+				title: this.props.blog.title,
+				blog_status: this.props.blog.blog_status,
 			});
 		}
 	}
@@ -131,6 +131,12 @@ export default class BlogForm extends Component {
 				<div className="one-column">
 					<RichTextEditor
 						handleRichTextEditorChange={this.handleRichTextEditorChange}
+						editMode={this.props.editMode}
+						contentToEdit={
+							this.props.editMode && this.props.blog.content
+								? this.props.blog.content
+								: null
+						}
 					/>
 				</div>
 				<div className="image-uploaders">

@@ -23,11 +23,13 @@ export default class BlogItem extends Component {
 	}
 
 	handleEditClick() {
-		console.log('handle edit click');
+		if (this.props.loginStatus === 'LOGGED_IN') {
+			console.log('handle edit click');
 
-		this.setState({
-			editMode: true,
-		});
+			this.setState({
+				editMode: true,
+			});
+		}
 	}
 	handleSuccessfulEditFormSubmission(blog) {
 		this.setState({

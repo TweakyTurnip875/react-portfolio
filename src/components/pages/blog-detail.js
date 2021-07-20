@@ -3,8 +3,8 @@ import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import BlogFeaturedImage from './blog-featured-image';
-import BlogForm from './blog-form';
+import BlogFeaturedImage from '../blog/blog-featured-image';
+import BlogForm from '../blog/blog-form';
 
 export default class BlogItem extends Component {
 	constructor(props) {
@@ -18,6 +18,8 @@ export default class BlogItem extends Component {
 		this.getBlogItems = this.getBlogItems.bind(this);
 		this.handleEditClick = this.handleEditClick.bind(this);
 		this.handleFeaturedImageDelete = this.handleFeaturedImageDelete.bind(this);
+		this.handleSuccessfulEditFormSubmission =
+			this.handleSuccessfulEditFormSubmission.bind(this);
 	}
 
 	handleEditClick() {
@@ -25,6 +27,12 @@ export default class BlogItem extends Component {
 
 		this.setState({
 			editMode: true,
+		});
+	}
+	handleSuccessfulEditFormSubmission(blog) {
+		this.setState({
+			currentBlog: blog,
+			editMode: false,
 		});
 	}
 
@@ -53,20 +61,18 @@ export default class BlogItem extends Component {
 		this.getBlogItems();
 	}
 	render() {
-		const { title, content, featured_image_url, blog_status, id } =
+		const { title, content, featured_image_url, blog_status } =
 			this.state.currentBlog;
 		const contentManager = () => {
 			if (this.state.editMode) {
 				return (
-					<div
-						style={{
-							display: 'grid',
-							gridTemplateColumns: '1fr 5fr 1fr',
-						}}
-					>
+					<div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr 1fr' }}>
 						<div style={{ gridColumn: '2' }}>
 							<BlogForm
 								handleFeaturedImageDelete={this.handleFeaturedImageDelete}
+								handleSuccessfulEditFormSubmission={
+									this.handleSuccessfulEditFormSubmission
+								}
 								editMode={this.state.editMode}
 								blog={this.state.currentBlog}
 							/>
@@ -88,10 +94,7 @@ export default class BlogItem extends Component {
 									<div className="blog-post-title-wrapper">
 										<h1>{title}</h1>
 									</div>
-									<div
-										className="blog-edit-click"
-										style={{ fontSize: '1.5em' }}
-									>
+									<div className="blog-edit-click">
 										<a onClick={this.handleEditClick}>
 											<FontAwesomeIcon icon="edit" />
 										</a>

@@ -26,12 +26,6 @@ class Blog extends Component {
 
 		window.addEventListener('scroll', this.onScroll, false);
 	}
-	handleSuccessfulNewBlogSubmission(blog) {
-		this.setState({
-			blogModalOpen: false,
-			blogItems: [blog].concat(this.state.blogItems),
-		});
-	}
 	onScroll() {
 		if (
 			this.state.isLoading ||
@@ -46,7 +40,12 @@ class Blog extends Component {
 			this.getBlogItems();
 		}
 	}
-
+	handleSuccessfulNewBlogSubmission(blog) {
+		this.setState({
+			blogModalOpen: false,
+			blogItems: [blog].concat(this.state.blogItems),
+		});
+	}
 	getBlogItems() {
 		this.setState({
 			currentPage: this.state.currentPage + 1,
@@ -70,6 +69,7 @@ class Blog extends Component {
 				console.log(error);
 			});
 	}
+
 	handleNewBlogClick() {
 		this.setState({
 			blogModalOpen: true,
@@ -82,7 +82,7 @@ class Blog extends Component {
 		});
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.getBlogItems();
 	}
 	componentWillUnmount() {
@@ -92,6 +92,7 @@ class Blog extends Component {
 		const blogRecords = this.state.blogItems.map((blogItem) => {
 			return <BlogItem key={blogItem.id} blogItem={blogItem} />;
 		});
+
 		return (
 			<div className="blog-detail-container">
 				{this.props.loginStatus === 'LOGGED_IN' ? (

@@ -4,7 +4,8 @@ import Trunctate from 'react-truncate';
 import striptags from 'striptags';
 
 const BlogItem = (props) => {
-	const { title, id, content } = props.blogItem;
+	const { id, blog_status, content, title, featured_image_url } =
+		props.blogItem;
 	return (
 		<div className="title-content" style={{ paddingBottom: '40px' }}>
 			<Link to={`/b/${id}`}>

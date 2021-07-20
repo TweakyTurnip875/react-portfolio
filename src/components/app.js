@@ -1,28 +1,27 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import NavigationContainer from "./navigation/navigation-container";
-import Home from "./pages/home";
-import About from "./pages/about";
-import Contact from "./pages/contact";
-import Blog from "./pages/blog";
-import PortfolioDetail from "./portfolio/portfolio-detail";
-import NoMatch from "./pages/no-match";
-import Auth from "./pages/auth";
-import PortfolioManager from "./pages/portfolio-manager";
-import BlogDetail from "./blog/blog-detail";
-import Icons from "../helpers/icons";
-
+import NavigationContainer from './navigation/navigation-container';
+import Home from './pages/home';
+import About from './pages/about';
+import Contact from './pages/contact';
+import Blog from './pages/blog';
+import PortfolioDetail from './portfolio/portfolio-detail';
+import NoMatch from './pages/no-match';
+import Auth from './pages/auth';
+import PortfolioManager from './pages/portfolio-manager';
+import BlogDetail from './pages/blog-detail';
+import Icons from '../helpers/icons';
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 
-		Icons()
+		Icons();
 
 		this.state = {
-			loginStatus: "NOT_LOGGED_IN",
+			loginStatus: 'NOT_LOGGED_IN',
 			isLoading: true,
 		};
 		this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
@@ -32,45 +31,45 @@ export default class App extends Component {
 
 	handleSuccessfulLogin() {
 		this.setState({
-			loginStatus: "LOGGED_IN",
+			loginStatus: 'LOGGED_IN',
 		});
 	}
 	handleUnsuccessfulLogin() {
 		this.setState({
-			loginStatus: "NOT_LOGGED_IN",
+			loginStatus: 'NOT_LOGGED_IN',
 		});
 	}
 
 	handleSuccessfulLogout() {
 		this.setState({
-			loginStatus: "NOT_LOGGED_IN",
+			loginStatus: 'NOT_LOGGED_IN',
 		});
 	}
 
 	// checks to see weather or not the user is logged in.
 	checkLoginStatus() {
 		return axios
-			.get("https://api.devcamp.space/logged_in", {
+			.get('https://api.devcamp.space/logged_in', {
 				withCredentials: true,
 			})
 			.then((response) => {
 				const loggedIn = response.data.logged_in;
 				const loginStatus = this.state.loginStatus;
 
-				if (loggedIn && loginStatus === "LOGGED_IN") {
+				if (loggedIn && loginStatus === 'LOGGED_IN') {
 					return loggedIn;
-				} else if (loggedIn && loginStatus === "NOT_LOGGED_IN") {
+				} else if (loggedIn && loginStatus === 'NOT_LOGGED_IN') {
 					this.setState({
-						loginStatus: "LOGGED_IN",
+						loginStatus: 'LOGGED_IN',
 					});
-				} else if (!loggedIn && loginStatus === "LOGGED_IN") {
+				} else if (!loggedIn && loginStatus === 'LOGGED_IN') {
 					this.setState({
-						loginStatus: "NOT_LOGGED_IN",
+						loginStatus: 'NOT_LOGGED_IN',
 					});
 				}
 			})
 			.catch((error) => {
-				console.log("Error", error);
+				console.log('Error', error);
 			});
 	}
 	authorizedRoutes() {
@@ -117,7 +116,7 @@ export default class App extends Component {
 							/>
 							<Route path="/b/:slug" component={BlogDetail} />
 
-							{this.state.loginStatus === "LOGGED_IN"
+							{this.state.loginStatus === 'LOGGED_IN'
 								? this.authorizedRoutes()
 								: null}
 							<Route

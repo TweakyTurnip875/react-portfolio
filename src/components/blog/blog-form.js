@@ -14,6 +14,8 @@ export default class BlogForm extends Component {
 			blog_status: '',
 			content: '',
 			featured_image: '',
+			apiUrl: `https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs`,
+			apiAction: 'post',
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -69,24 +71,30 @@ export default class BlogForm extends Component {
 		});
 	}
 	handleSubmit(event) {
-		axios
-			.post(
-				'https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs',
-				this.buildForm(),
-				{ withCredentials: true }
-			)
+		axios({
+			method: this.state.apiAction,
+			url: this.state.apiUrl,
+			data: this.buildForm(),
+			withCredentials: true,
+		})
 			.then((res) => {
 				if (this.state.featured_image) {
 					this.featuredImageRef.current.dropzone.removeAllFiles();
 				}
+
 				this.setState({
 					title: '',
 					blog_status: '',
 					content: '',
 					featured_image: '',
 				});
-
-				this.props.handleSuccessfulFormSubmission(res.data.portfolio_blog);
+				if (this.props.editMode) {
+					this.props.handleSuccessfulEditFormSubmission(
+						res.data.portfolio_blog
+					);
+				} else {
+					this.props.handleSuccessfulFormSubmission(res.data.portfolio_blog);
+				}
 			})
 			.catch((error) => {
 				console.log('error posting blog', error);
@@ -115,10 +123,14 @@ export default class BlogForm extends Component {
 
 	componentDidMount() {
 		if (this.props.editMode) {
+			const { id, title, blog_status, content } = this.props.blog;
 			this.setState({
-				id: this.props.blog.id,
-				title: this.props.blog.title,
-				blog_status: this.props.blog.blog_status,
+				id: id,
+				title: title,
+				blog_status: blog_status,
+				content: content,
+				apiUrl: `https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs/${id}`,
+				apiAction: 'patch',
 			});
 		}
 	}

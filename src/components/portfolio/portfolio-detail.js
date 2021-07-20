@@ -30,25 +30,38 @@ export default class PortfolioDetail extends Component {
 		this.getPortfolioItem();
 	}
 	render() {
-		const { logo_url, banner_image_url, description, url, name } =
-			this.state.portfolioItem;
+		const {
+			logo_url,
+			banner_image_url,
+			description,
+			url,
+			name,
+			thumb_image_url,
+		} = this.state.portfolioItem;
 		return (
-			<div>
+			<div className="portfolio-details-wrapper">
 				<div
+					className="background"
 					style={{
-						background: `url(${banner_image_url})`,
-						backgroundSize: 'cover',
-						width: '100vw',
-						height: '50vh',
+						background: `url(${thumb_image_url})`,
 					}}
 				>
-					<img src={logo_url} />
-				</div>
-				<h2>{description}</h2>
-				<div>
-					<a href={url} target="_blank">
-						Visit {name}
-					</a>
+					<div className="details-wrapper">
+						<div className="logo">
+							<img src={logo_url} />
+						</div>
+						<div className="details">
+							<div className="name-desc-wrapper">
+								<div className="name-desc">
+									<div>
+										<h1>{description}</h1>
+									</div>
+
+									<button className="btn">Visit {name}</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		);

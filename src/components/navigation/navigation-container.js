@@ -1,10 +1,10 @@
-import React from "react";
-import axios from "axios";
-import { withRouter } from "react-router";
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import axios from 'axios';
+import { withRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import PortfolioManager from "../pages/portfolio-manager";
+import PortfolioManager from '../pages/portfolio-manager';
 
 const NavigationContainer = (props) => {
 	const dynamicLink = (route, text) => {
@@ -18,16 +18,16 @@ const NavigationContainer = (props) => {
 	};
 	const handleSignOut = () => {
 		axios
-			.delete("https://api.devcamp.space/logout", { withCredentials: true })
+			.delete('https://api.devcamp.space/logout', { withCredentials: true })
 			.then((res) => {
 				if (res.status === 200) {
-					props.history.push("/");
+					props.history.push('/');
 					props.handleSuccessfulLogout();
 				}
 				return res.data;
 			})
 			.catch((error) => {
-				console.log("Error signing out", error);
+				console.log('Error signing out', error);
 			});
 	};
 
@@ -54,13 +54,13 @@ const NavigationContainer = (props) => {
 						Blog
 					</NavLink>
 				</div>
-				{props.loginStatus === "LOGGED_IN"
-					? dynamicLink("/portfolio-manager", "Portfolio Manager")
+				{props.loginStatus === 'LOGGED_IN'
+					? dynamicLink('/portfolio-manager', 'Portfolio Manager')
 					: null}
 			</div>
 			<div className="right-side">
 				TWEAKYTURNIP875
-				{props.loginStatus === "LOGGED_IN" ? (
+				{props.loginStatus === 'LOGGED_IN' ? (
 					<a onClick={handleSignOut}>
 						<FontAwesomeIcon icon="sign-out-alt" />
 					</a>

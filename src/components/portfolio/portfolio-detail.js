@@ -46,10 +46,10 @@ export default class PortfolioDetail extends Component {
 						background: `url(${thumb_image_url})`,
 					}}
 				>
+					<div className="logo">
+						<img src={logo_url} />
+					</div>
 					<div className="details-wrapper">
-						<div className="logo">
-							<img src={logo_url} />
-						</div>
 						<div className="details">
 							<div className="name-desc-wrapper">
 								<div className="name-desc">
@@ -57,7 +57,9 @@ export default class PortfolioDetail extends Component {
 										<h1>{description}</h1>
 									</div>
 
-									<button className="btn">Visit {name}</button>
+									<a href={url} target="_blank">
+										Visit {name}
+									</a>
 								</div>
 							</div>
 						</div>

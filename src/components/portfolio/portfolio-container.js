@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
-import PortfolioItem from "./portfolio-item";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PortfolioItem from './portfolio-item';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class PortfolioContainer extends Component {
 	constructor() {
 		super();
 
 		this.state = {
-			pageTitle: "Welcome to my portfolio.",
+			pageTitle: 'Welcome to my portfolio.',
 			isLoading: true,
 			data: [], // data from api gets stored in here.
 		};
@@ -17,31 +17,35 @@ export default class PortfolioContainer extends Component {
 	}
 	// filters through the data array in state on button press.
 	handleFilter(filter) {
-		this.setState({
-			data: this.state.data.filter((item) => {
-				return item.category === filter;
-			}),
-		});
+		if (filter === 'CLEAR_FILTER') {
+			this.getData();
+		} else {
+			this.getData(filter);
+		}
 	}
 	// gets data from api.
-	getData() {
+	getData(filter = null) {
 		axios
-			.get("https://tweakyturnip875.devcamp.space/portfolio/portfolio_items")
+			.get('https://tweakyturnip875.devcamp.space/portfolio/portfolio_items')
 			.then((res) => {
-				// handle success
-				this.setState({
-					data: res.data.portfolio_items,
-					isLoading: false,
-				});
+				if (filter) {
+					this.setState({
+						data: res.data.portfolio_items.filter((item) => {
+							return item.category === filter;
+						}),
+					});
+				} else {
+					this.setState({
+						data: res.data.portfolio_items,
+						isLoading: false,
+					});
+				}
 			})
 			.catch((error) => {
-				// handle error
 				console.log(error);
 			});
 	}
-	// Sets data for the portfolio items.
 	portfolioItems() {
-		// maps through data array in state.
 		return this.state.data.map((item) => {
 			return <PortfolioItem key={item.id} item={item} />;
 		});
@@ -61,20 +65,31 @@ export default class PortfolioContainer extends Component {
 		}
 
 		return (
-			<div className="portfolio-items-wrapper">
-				<button
-					className="btn"
-					onClick={() => this.handleFilter("Entertainment")}
-				>
-					Entertainment
-				</button>
-				<button className="btn" onClick={() => this.handleFilter("Scheduling")}>
-					Scheduling
-				</button>
-				<button className="btn" onClick={() => this.handleFilter("Learning")}>
-					Learning
-				</button>
-				{this.portfolioItems()}
+			<div className="filter-container">
+				<div className="filter-wrapper">
+					<button
+						className="btn"
+						onClick={() => this.handleFilter('Entertainment')}
+					>
+						Entertainment
+					</button>
+					<button
+						className="btn"
+						onClick={() => this.handleFilter('Scheduling')}
+					>
+						Scheduling
+					</button>
+					<button className="btn" onClick={() => this.handleFilter('Learning')}>
+						Learning
+					</button>
+					<button
+						className="btn"
+						onClick={() => this.handleFilter('CLEAR_FILTER')}
+					>
+						All
+					</button>
+				</div>
+				<div className="portfolio-items-wrapper">{this.portfolioItems()}</div>
 			</div>
 		);
 	}

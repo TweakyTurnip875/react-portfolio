@@ -250,12 +250,17 @@ export default class PortfolioForm extends Component {
 
 					{this.state.banner_image_url && this.state.editMode ? (
 						<div className="portfolio-manager-edit-image">
-							<img src={this.state.banner_image_url} />
+							<div className="edit-dropzone-image">
+								<img src={this.state.banner_image_url} />
 
-							<div className="image-delete-link">
-								<a onClick={() => this.deleteImage('banner_image')}>
-									<FontAwesomeIcon icon="times" className="file-removal-icon" />
-								</a>
+								<div className="image-delete-link">
+									<a onClick={() => this.deleteImage('banner_image')}>
+										<FontAwesomeIcon
+											icon="times"
+											className="file-removal-icon"
+										/>
+									</a>
+								</div>
 							</div>
 						</div>
 					) : (
@@ -271,12 +276,17 @@ export default class PortfolioForm extends Component {
 
 					{this.state.logo_url && this.state.editMode ? (
 						<div className="portfolio-manager-edit-image">
-							<img src={this.state.logo_url} />
+							<div className="edit-dropzone-image">
+								<img src={this.state.logo_url} />
 
-							<div className="image-delete-link">
-								<a onClick={() => this.deleteImage('logo')}>
-									<FontAwesomeIcon icon="times" className="file-removal-icon" />
-								</a>
+								<div className="image-delete-link">
+									<a onClick={() => this.deleteImage('logo')}>
+										<FontAwesomeIcon
+											icon="times"
+											className="file-removal-icon"
+										/>
+									</a>
+								</div>
 							</div>
 						</div>
 					) : (

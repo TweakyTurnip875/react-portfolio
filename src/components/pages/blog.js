@@ -46,6 +46,24 @@ class Blog extends Component {
 			blogItems: [blog].concat(this.state.blogItems),
 		});
 	}
+	handleDeleteClick(blog) {
+		axios
+			.delete(
+				`https://tweakyturnip875.devcamp.space/portfolio/portfolio_blogs/${blog.id}`,
+				{ withCredentials: true }
+			)
+			.then((res) => {
+				this.setState({
+					blogItems: this.state.blogItems.filter((item) => {
+						return blog.id !== item.id;
+					}),
+				});
+				console.log('deleted', res);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
 	getBlogItems() {
 		this.setState({
 			currentPage: this.state.currentPage + 1,
@@ -90,7 +108,19 @@ class Blog extends Component {
 	}
 	render() {
 		const blogRecords = this.state.blogItems.map((blogItem) => {
-			return <BlogItem key={blogItem.id} blogItem={blogItem} />;
+			if (this.props.loginStatus === 'LOGGED_IN') {
+				return (
+					<div className="delete-blog-wrapper" key={blogItem.id}>
+						<BlogItem blogItem={blogItem} />
+
+						<a onClick={() => this.handleDeleteClick(blogItem)}>
+							<FontAwesomeIcon icon="trash" />
+						</a>
+					</div>
+				);
+			} else {
+				return <BlogItem key={blogItem.id} blogItem={blogItem} />;
+			}
 		});
 
 		return (

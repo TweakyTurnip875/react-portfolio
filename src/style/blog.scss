@@ -4,6 +4,17 @@
 	align-items: center;
 	position: relative;
 
+	.delete-blog-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		a {
+			margin-left: 15px;
+			cursor: pointer;
+		}
+	}
+
 	.fixed-blog-button-styles,
 	.new-blog-icon-wrapper {
 		position: fixed;

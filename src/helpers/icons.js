@@ -12,6 +12,7 @@ import {
 	faPhone,
 	faEnvelope,
 	faMapMarkedAlt,
+	faUnlockAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Icons = () => {
@@ -25,7 +26,8 @@ const Icons = () => {
 		faPlusSquare,
 		faPhone,
 		faEnvelope,
-		faMapMarkedAlt
+		faMapMarkedAlt,
+		faUnlockAlt
 	);
 };
 

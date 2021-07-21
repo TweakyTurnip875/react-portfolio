@@ -1,16 +1,33 @@
 .auth-page-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: calc(100vh - 78px);
-    .left-column {
-        background-size: cover;
-        
-    }
-    .right-column {
-        display:flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $offwhite;
-    }
-    @include base-input();
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	height: calc(100vh - 85px);
+	.left-column {
+		background-size: cover;
+		width: 50vw;
+	}
+	.right-column {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: $offwhite;
+	}
+}
+.login-form-wrapper {
+	@include base-grid;
+	@include base-input();
+
+	padding: 42px;
+	grid-gap: 42px;
+
+	.form-item-wrapper {
+		display: flex;
+
+		svg {
+			font-size: 2em;
+			margin-right: 15px;
+			color: $blue;
+		}
+	}
 }

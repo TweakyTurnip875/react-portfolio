@@ -7,21 +7,22 @@ const BlogItem = (props) => {
 	const { id, blog_status, content, title, featured_image_url } =
 		props.blogItem;
 	return (
-		<div className="title-content">
+		<div className="title-content" style={{ paddingBottom: '40px' }}>
 			<Link to={`/b/${id}`}>
 				<h1 style={{ fontSize: '1.5em' }}>{title}</h1>
 			</Link>
-
-			<Trunctate
-				lines={5}
-				ellipsis={
-					<span>
-						...<Link to={`/b/${id}`}>read more</Link>
-					</span>
-				}
-			>
-				{striptags(content)}
-			</Trunctate>
+			<div>
+				<Trunctate
+					lines={5}
+					ellipsis={
+						<span>
+							...<Link to={`/b/${id}`}>read more</Link>
+						</span>
+					}
+				>
+					{striptags(content)}
+				</Trunctate>
+			</div>
 		</div>
 	);
 };

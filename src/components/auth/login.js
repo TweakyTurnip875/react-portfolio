@@ -65,11 +65,10 @@ export default class LoginComponent extends Component {
 							placeholder="Your Email"
 							value={this.state.email}
 							onChange={this.handleChange}
-							style={{ marginBottom: '0px' }}
 						/>
 					</div>
 					<div className="form-item-wrapper">
-						<FontAwesomeIcon icon="unlock-alt" className="" />
+						<FontAwesomeIcon icon="unlock-alt" />
 						<input
 							type="password"
 							name="password"

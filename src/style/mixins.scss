@@ -1,40 +1,42 @@
 @mixin base-btn {
-    cursor: pointer;
-    height: 42px;
-    font-size: 1em;
-    font-weight: 500;
-    border: 1px solid transparent;
-    transition: all 0.5s ease-in-out;
-    background-color: $blue;
-    color: white;
-    &:active, &:focus {
-        outline: none;
-    }
-    &:hover {
-        background-color: $dark-blue;
-    }
+	cursor: pointer;
+	height: 42px;
+	font-size: 1em;
+	font-weight: 500;
+	border: 1px solid transparent;
+	transition: all 0.5s ease-in-out;
+	background-color: $blue;
+	color: white;
+	&:active,
+	&:focus {
+		outline: none;
+	}
+	&:hover {
+		background-color: $dark-blue;
+	}
 }
 
 @mixin base-input {
-    input {
-        width:100%;
-        font-family: "Ubuntu", sans-serif;
-        border:none;
-        border-bottom: 1px solid $blue;
-        font-size:1.1em;
-        background-color: transparent;
-        color:$charcoal;
-        padding:5px 0px;
-        transition: 0.5s all ease-in-out;
-        margin-bottom: 21px;
-        &:focus {
-            outline: none;
-            border-bottom: 1px solid $dark-blue;
-        }
-    }
+	input {
+		width: 100%;
+		font-family: 'Titillium Web', sans-serif;
+
+		border: none;
+		border-bottom: 1px solid $blue;
+		font-size: 1.1em;
+		background-color: transparent;
+		color: $charcoal;
+		padding: 5px 0px;
+		transition: 0.5s all ease-in-out;
+		margin-bottom: 21px;
+		&:focus {
+			outline: none;
+			border-bottom: 1px solid $dark-blue;
+		}
+	}
 }
 
 @mixin base-grid {
-    display:grid;
-    grid-gap:21px;
+	display: grid;
+	grid-gap: 21px;
 }
